@@ -22,12 +22,22 @@ app.get("/notes", function (req, res) {
 });
 
 app.post("/notes", function (req, res) {
-	const title = req.body.title
-	const content = req.body.content
+	const title = req.body.title;
+	const content = req.body.content;
 
-	db.prepare("INSERT INTO notes (title, content) VALUES (?, ?)").run(title, content)
-	res.json(`Your ${title} has been created successfully`)
+	db.prepare("INSERT INTO notes (title, content) VALUES (?, ?)").run(
+		title,
+		content,
+	);
+	res.json(`Your ${title} has been created successfully`);
 });
+
+
+app.delete("/notes/:id", function (req, res) {
+	const noteId = Number(req.params.id)
+	db.prepare("DELETE FROM notes WHERE id = (?)").run(noteId)
+	res.json(`Note with an id of ${noteId} has been deleted successfully`)
+})
 
 app.listen(3000, () => {
 	console.log("The server is running xoxo");
