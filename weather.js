@@ -1,4 +1,3 @@
-const nameGrab = process.argv[2];
 require("dotenv").config();
 const key = process.env.apiKey;
 
