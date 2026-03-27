@@ -1,11 +1,13 @@
+// my weather api call
 require("dotenv").config();
-const key = process.env.apiKey;
+const apiKey = process.env.apiKey;
 
-async function getWeather(nameGrab) {
-	const response = await fetch(
-		`https://api.openweathermap.org/data/2.5/weather?q=${nameGrab},&APPID=${key}&units=metric`,
+const getWeather = async (nameOfCity) => {
+	const reply = await fetch(
+		`https://api.openweathermap.org/data/2.5/weather?q=${nameOfCity},&APPID=${apiKey}&units=metric`,
 	);
-	const data = await response.json();
+	const data = await reply.json();
+
 	console.log(`
 		City: ${data.name}
 		Temperature: ${data.main.temp}
@@ -14,6 +16,6 @@ async function getWeather(nameGrab) {
 		Wind: ${data.wind.speed}
 
 		`);
-}
+};
 
 getWeather("Uyo");
